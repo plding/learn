@@ -23,10 +23,10 @@ private:
     int flag;
     // used in image undistortion
     cv::Mat map1, map2;
-    bool mustInitUndistor;
+    bool mustInitUndistort;
 
 public:
-    CameraCalibrator() : flag(0), mustInitUndistor(true) {};
+    CameraCalibrator() : flag(0), mustInitUndistort(true) {};
 
     // Open the chessboard images and extract corner points
     int addChessboardPoints(const std::vector<std::string> &filelist, cv::Size &boardSize)
@@ -84,7 +84,7 @@ public:
     double calibrate(const cv::Size &imageSize)
     {
         // undistorter must be reinitialized
-        mustInitUndistor = true;
+        mustInitUndistort = true;
 
         // Output rotations and translations
         std::vector<cv::Mat> rvecs, tvecs;
@@ -104,7 +104,7 @@ public:
     {
         cv::Mat undistorted;
 
-        if (mustInitUndistor) {
+        if (mustInitUndistort) {
             cv::initUndistortRectifyMap(cameraMatrix,       // computed camera matrix
                                         distCoeffs,         // computed distortion matrix
                                         cv::Mat(),          // optional rectification (none)
@@ -113,7 +113,7 @@ public:
                                         CV_32FC1,           // type of output map
                                         map1, map2);        // the x and y mapping functions
 
-            mustInitUndistor = false;
+            mustInitUndistort = false;
         }
 
         // Apply mapping functions
@@ -121,6 +121,10 @@ public:
 
         return undistorted;
     }
+
+    // Getters
+    cv::Mat getCameraMatrix() { return cameraMatrix; }
+    cv::Mat getDistCoeffs() { return distCoeffs; }
 };
 
 #endif /* CAMERACALIBRATOR_H */

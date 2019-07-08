@@ -34,6 +34,17 @@ int main()
     image = cv::imread(filelist[6]);
     cv::Mat uImage = cameraCalibrator.remap(image);
 
+    // display camera matrix
+    cv::Mat cameraMatrix = cameraCalibrator.getCameraMatrix();
+    std::cout << " Camera intrinsic: " << cameraMatrix.rows << "x" << cameraMatrix.cols
+              << std::endl;
+    std::cout << cameraMatrix.at<double>(0, 0) << " " << cameraMatrix.at<double>(0, 1) << " "
+              << cameraMatrix.at<double>(0, 2) << std::endl;
+    std::cout << cameraMatrix.at<double>(1, 0) << " " << cameraMatrix.at<double>(1, 1) << " "
+              << cameraMatrix.at<double>(1, 2) << std::endl;
+    std::cout << cameraMatrix.at<double>(2, 0) << " " << cameraMatrix.at<double>(2, 1) << " "
+              << cameraMatrix.at<double>(2, 2) << std::endl;
+
     imshow("Original Image", image);
     imshow("Undistorted Image", uImage);
 
