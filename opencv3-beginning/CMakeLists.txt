@@ -1,6 +1,8 @@
 cmake_minimum_required (VERSION 2.8)
 project (OpenCV3-beginning)
 
+list(APPEND CMAKE_CXX_FLAGS "-std=c++11 -Wno-unsequenced")
+
 # find the required packages
 find_package(OpenCV REQUIRED)
 
@@ -12,6 +14,7 @@ set(CHAPTERS
     ch07
     ch08
     ch09
+    ch10
 )
 
 include_directories(${OpenCV_INCLUDE_DIRS})
