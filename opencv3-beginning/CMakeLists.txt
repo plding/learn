@@ -15,6 +15,7 @@ set(CHAPTERS
     ch08
     ch09
     ch10
+    ch11
 )
 
 include_directories(${OpenCV_INCLUDE_DIRS})
