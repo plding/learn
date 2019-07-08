@@ -14,6 +14,7 @@ set(CHAPTERS
     ch06
     ch07
     ch08
+    ch09
     faces
 )
 
