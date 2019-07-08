@@ -8,6 +8,7 @@ find_package(OpenCV REQUIRED)
 
 set(CHAPTERS
     ch02
+    ch10
 )
 
 include_directories(${OpenCV_INCLUDE_DIRS})
