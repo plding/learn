@@ -8,6 +8,7 @@ find_package(OpenCV REQUIRED)
 
 set(CHAPTERS
     features2d
+    objectDetection
 )
 
 include_directories(${OpenCV_INCLUDE_DIRS})
