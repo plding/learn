@@ -10,6 +10,7 @@ set(CHAPTERS
     imgproc
     features2d
     objectDetection
+    samples
 )
 
 include_directories(${OpenCV_INCLUDE_DIRS})
