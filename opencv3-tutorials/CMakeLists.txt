@@ -11,6 +11,7 @@ set(CHAPTERS
     features2d
     objectDetection
     samples
+    ml
 )
 
 include_directories(${OpenCV_INCLUDE_DIRS})
