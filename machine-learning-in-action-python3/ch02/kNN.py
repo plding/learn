@@ -33,4 +33,4 @@ def datingClassTest():
         result = classify0(normMat[i,:], normMat[testNum:,:], datingLabels[testNum:], 3)
         print("the classifier came back with: %d, the real answer is: %d" % (result, datingLabels[i]))
         if (result != datingLabels[i]): errorNum += 1
-    print("the total test is: %d, error number is: %d, error rate is: %f" % (testNum, errorNum, errorNum/testNum))
+    print("the total test is: %d, error is: %d, error rate is: %f" % (testNum, errorNum, errorNum / testNum))
