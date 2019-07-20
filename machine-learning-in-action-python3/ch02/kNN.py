@@ -16,7 +16,7 @@ def classify0(inX, dataSet, labels, k):
 
 def file2matrix(filename):
     matrix = np.loadtxt(filename)
-    return matrix[:,:3], matrix[:,3:4].transpose()[0]
+    return matrix[:,:3], matrix[:,3:4].ravel()
 
 def autoNorm(dataSet):
     minVals = dataSet.min(0)
