@@ -1,3 +1,4 @@
+#-*- coding:utf-8 -*-
 from numpy import *
 from time import sleep
 
@@ -69,3 +70,20 @@ def smoSimple(dataMatIn, classLabels, C, toler, maxIter):
         else: iter = 0
         print "iteration number: %d" % iter
     return b, alphas
+
+def plotSupportVectors(data, labels, b, alphas):
+    import matplotlib.pyplot as plt
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    data1 = data[where(labels==1)]
+    data2 = data[where(labels==-1)]
+    ax.scatter(data1[:,0], data1[:,1], marker='s', s=90)
+    ax.scatter(data2[:,0], data2[:,1], marker='o', s=50, c='red')
+    w1, w2 = dot((tile(labels.reshape(1, -1).T, (1, 2)) * data).T, array(alphas)).ravel()
+    b = float(b)
+    x = [data.max(axis=0)[0], data.min(axis=0)[0]]
+    y = [(-b - w1 * x[0]) / w2, (-b - w1 * x[1]) / w2] 
+    ax.plot(x, y)
+    sv = data[where(alphas>0)]
+    ax.scatter(sv[:,0], sv[:,1], s=150, c='none', edgecolor='green')
+    plt.show()
