@@ -7,3 +7,4 @@ ch02 - K Nearest Neighbors
 ch03 - Decision Tree
 ch05 - Logistic Regression
 ch06 - Support Vector Machine
+ch13 - Principal Component Analysis
