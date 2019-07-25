@@ -12,6 +12,7 @@ set(CHAPTERS
     objectDetection
     samples
     ml
+    face
 )
 
 include_directories(${OpenCV_INCLUDE_DIRS})

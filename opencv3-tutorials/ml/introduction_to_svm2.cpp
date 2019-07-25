@@ -20,6 +20,8 @@ int main(int argc, char **argv)
     svm->setKernel(SVM::LINEAR);
     svm->setTermCriteria(TermCriteria(TermCriteria::MAX_ITER, 100, 1e-6));
     svm->train(trainingDataMat, ROW_SAMPLE, labelsMat);
+    // svm->save("svm_test.xml");
+    // Ptr<SVM> svm = SVM::load("svm_test.xml");
 
     // Data for visual representation
     int width = 512, height = 512;
