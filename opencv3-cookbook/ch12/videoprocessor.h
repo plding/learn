@@ -1,6 +1,13 @@
 #ifndef VIDEO_PROCESSOR_H
 #define VIDEO_PROCESSOR_H
 
+// The frame processor interface
+class FrameProcessor {
+
+public:
+    virtual void process(cv::Mat &input, cv::Mat &output) = 0;
+};
+
 class VideoProcessor {
 
 private:
@@ -8,6 +15,8 @@ private:
     cv::VideoCapture capture;
     // the callback function to be called for the processing of each frame
     void (*process)(cv::Mat &, cv::Mat &);
+    // the pointer to the class implementing the FrameProcessor interface
+    FrameProcessor *frameProcessor;
     // Input display window name
     std::string windowNameInput;
     // Output display window name
@@ -112,6 +121,12 @@ public:
         process = frameProcessorCallback;
     }
 
+    // set the instance of the class that implements the FrameProcessor interface
+    void setFrameProcessor(FrameProcessor *frameProcessorPtr)
+    {
+        frameProcessor = frameProcessorPtr;
+    }
+
     // Stop the processing
     void stopIt() { stop = true; }
 
@@ -148,7 +163,9 @@ public:
             }
 
             // calling the process function or method
-            if (process) {
+            if (frameProcessor) {
+                frameProcessor->process(frame, output);
+            } else if (process) {
                 process(frame, output);
             } else {
                 output = frame;
