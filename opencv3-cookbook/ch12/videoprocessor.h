@@ -1,6 +1,12 @@
 #ifndef VIDEO_PROCESSOR_H
 #define VIDEO_PROCESSOR_H
 
+#include <opencv2/core.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/imgproc.hpp>
+
+#include <iostream>
+
 // The frame processor interface
 class FrameProcessor {
 
@@ -13,14 +19,22 @@ class VideoProcessor {
 private:
     // the OpenCV video capture object
     cv::VideoCapture capture;
+    
+    // vector of image filename to be used as input
+    std::vector<std::string> images;
+    // image vector iterator
+    std::vector<std::string>::const_iterator itImg;
+    
     // the callback function to be called for the processing of each frame
     void (*process)(cv::Mat &, cv::Mat &);
     // the pointer to the class implementing the FrameProcessor interface
     FrameProcessor *frameProcessor;
+    
     // Input display window name
     std::string windowNameInput;
     // Output display window name
     std::string windowNameOutput;
+
     // delay between each frame processing
     int delay;
     // to stop the processing
@@ -34,7 +48,16 @@ private:
     // to get the next frame
     bool readNextFrame(cv::Mat &frame)
     {
-        return capture.read(frame);
+        if (capture.isOpened()) {
+            return capture.read(frame);
+        }
+
+        if (itImg != images.end()) {
+            frame = cv::imread(*itImg++);
+            return !frame.empty();
+        }
+
+        return false;
     }
 
     // to write the output frame
@@ -48,7 +71,22 @@ public:
     VideoProcessor() : delay(-1), stop(false) {}
 
     // set the name of the video file 
-    bool setInput(std::string filename) { return capture.open(filename); }
+    bool setInput(std::string filename)
+    {
+        images.clear();
+        return capture.open(filename);
+    }
+
+    // set the vector of input images
+    bool setInput(const std::vector<std::string> &imgs)
+    {
+        capture.release();
+        
+        images = imgs;
+        itImg = images.begin();
+
+        return true;
+    }
 
     // set the output video file
     bool setOutput(const std::string &filename, int codec = 0, double fps = 0.0,
@@ -83,20 +121,38 @@ public:
     void displayOutput(std::string name) { windowNameOutput = name; }
 
     // return the frame rate
-    double getFrameRate() { return capture.get(cv::CAP_PROP_FPS); } 
+    double getFrameRate()
+    {
+        if (images.size() == 0) {
+            return 0;
+        }
+
+        return capture.get(cv::CAP_PROP_FPS);
+    } 
 
     // return the size of the video frame
     cv::Size getFrameSize()
     {
-        int w = static_cast<int>(capture.get(cv::CAP_PROP_FRAME_WIDTH));
-        int h = static_cast<int>(capture.get(cv::CAP_PROP_FRAME_HEIGHT));
+        if (images.size() == 0) {
+            return cv::Size(static_cast<int>(capture.get(cv::CAP_PROP_FRAME_WIDTH)),
+                            static_cast<int>(capture.get(cv::CAP_PROP_FRAME_HEIGHT)));
+        }
 
-        return cv::Size(w, h);
+        cv::Mat tmp = cv::imread(images[0]);
+        if (!tmp.empty()) {
+            return tmp.size();
+        }
+
+        return cv::Size(0, 0);
     }
 
     // get the codec of input video
     int getCodec(char codec[4])
     {
+        if (images.size() != 0) {
+            return -1;
+        }
+
         union {
             int value;
             char code[4];
@@ -134,7 +190,7 @@ public:
     bool isStopped() { return stop; }
 
     // Is a capture device opened?
-    bool isOpened() { return capture.isOpened(); }
+    bool isOpened() { return capture.isOpened() || images.size() != 0; }
 
     // to grab (and process) the frame of the sequence
     void run()

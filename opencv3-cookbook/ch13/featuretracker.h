@@ -85,8 +85,8 @@ public:
         handleTrackedPoints(frame, output);
 
         // 5. current points and image become previous ones
-        std::swap(points[1], points[0]);
-        cv::swap(gray_prev, gray);
+        points[0] = points[1];
+        gray_prev = gray.clone();
     }
 
     // feature point detection
