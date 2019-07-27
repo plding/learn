@@ -9,6 +9,7 @@ find_package(OpenCV REQUIRED)
 set(PROJECTS
     AlphaBlending
     Delaunay
+    FaceSwap
 )
 
 include_directories(${OpenCV_INCLUDE_DIRS})
