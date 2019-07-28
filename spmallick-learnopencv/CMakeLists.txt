@@ -3,6 +3,7 @@ project (spmallick-learnopencv)
 
 # projects
 add_subdirectory(AlphaBlending)
-# add_subdirectory(Delaunay)
-# add_subdirectory(FaceSwap)
+add_subdirectory(Delaunay)
+add_subdirectory(FaceSwap)
 add_subdirectory(SeamlessCloning)
+add_subdirectory(WarpTriangle)
