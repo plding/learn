@@ -3,6 +3,7 @@ project (spmallick-learnopencv)
 
 # projects
 add_subdirectory(AlphaBlending)
+add_subdirectory(BlobDetector)
 add_subdirectory(CenterofBlob)
 add_subdirectory(ConvexHull)
 add_subdirectory(Delaunay)
