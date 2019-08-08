@@ -1,4 +1,4 @@
-DIRS = ch01
+DIRS = ch01 ch07 ch08
 
 all:
 	$(foreach dir,$(DIRS),cd $(dir); make)

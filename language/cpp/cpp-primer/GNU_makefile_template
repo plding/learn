@@ -28,14 +28,14 @@ LOCFLAGS =
 # to build each .exe file listed in that subdirectory's makefile
 all: $(OBJECTS) 
 
-# rule that says how to make a .o object file from a .cc source file
+# rule that says how to make a .o object file from a .cpp source file
 # for a given source file in a given directory you could compile it
 # into an object file by executing "make filename.o"
 
 # $< and $@ are macros defined by make
 #     $< refers to the file being processed (i.e., compiled or linked)
 #     $@ refers to the generated file
-%.o: %.cc 
+%.o: %.cpp
 	$(CC) $(CCFLAGS) $(LOCFLAGS) -c $< -o $@
 
 # rule that says how to make a .exe executable file from a .o object file
