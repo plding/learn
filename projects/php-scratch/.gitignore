@@ -1,0 +1,17 @@
+Makefile
+Makefile.fragments
+Makefile.objects
+aclocal.m4
+autom4te.cache/
+buildmk.stamp
+config.log
+config.nice
+config.status
+configure
+generated_lists
+install-sh
+main/php_config.h
+missing
+mkinstalldirs
+sapi/cli/php
+*.lo
