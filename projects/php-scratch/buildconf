@@ -1,0 +1,8 @@
+#!/bin/sh
+
+echo "Removing configure caches"
+rm -rf autom4te.cache config.cache aclocal.m4
+
+rm -f generated_lists
+
+${MAKE:-make} -s -f build/build.mk SUPPRESS_WARNINGS=""
