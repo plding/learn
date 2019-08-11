@@ -13,7 +13,7 @@ install:
 	\$(MAKE) -f $OBJS/Makefile install
 
 clean:
-	rm -rf Makefile $OBJS
+	rm -rf Makefile $OBJS nginx
 
 END
 

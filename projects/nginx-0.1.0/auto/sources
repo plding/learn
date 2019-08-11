@@ -22,8 +22,11 @@ EVENT_DEPS="src/event/ngx_event.h"
 EVENT_SRCS=""
 
 
-UNIX_INCS="$CORE_INCS $EVENT_INCS"
+UNIX_INCS="$CORE_INCS $EVENT_INCS src/os/unix"
 
 UNIX_DEPS="$CORE_DEPS $EVENT_DEPS"
 
 UNIX_SRCS="$CORE_SRCS $EVENT_SRCS"
+
+
+POSIX_DEPS="src/os/unix/ngx_posix_config.h"
