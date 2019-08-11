@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Copyright (C) Ding Peilong
+
+
+. auto/options
+. auto/init
+. auto/sources
+
+test -d $OBJS || mkdir $OBJS
+echo > $NGX_AUTO_CONFIG_H
+
+if [ $DEBUG = YES ]; then
+    have=NGX_DEBUG . auto/have
+fi
+
+. auto/os/conf
+
+. auto/cc
+
+. auto/make
+. auto/install

@@ -1,0 +1,10 @@
+
+# Copyright (C) Ding Peilong
+
+LINK="\$(CC)"
+
+INCOPT="-I "
+COMPOPT="-c"
+OBJOUT="-o "
+BINOUT="-o "
+OBJEXT="o"

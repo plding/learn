@@ -1,0 +1,46 @@
+
+# Copyright (C) Ding Peilong
+
+help=no
+
+PREFIX=
+SBIN_PATH=
+CONF_PATH=
+HTTP_LOG_PATH=
+ERROR_LOG_PATH=
+PID_PATH=
+
+CC=gcc
+CPP=
+OBJS=objs
+
+DEBUG=NO
+
+
+for option
+do
+    case "$option" in
+        -*=*) value=`echo "$option" | sed -e 's/[-_a-zA-Z0-9]*=//'` ;;
+           *) value="" ;;
+    esac
+
+    case "$option" in
+        --help)                     help=yes            ;;
+
+        --prefix=*)                 PREFIX="$value"     ;;
+
+        *)
+            echo "$0: error: invalid option \"$option\""
+            exit 1
+        ;;
+    esac
+done
+
+
+if [ $help = yes ]; then
+    echo
+    echo "  --help                         this message"
+    echo
+
+    exit 1
+fi

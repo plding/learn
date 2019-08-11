@@ -1,0 +1,99 @@
+
+# Copyright (C) Ding Peilong
+
+
+mkdir -p $OBJS/src/core $OBJS/src/event \
+         $OBJS/src/os/unix
+
+
+echo "CC = $CC"                                                   >> $MAKEFILE
+echo "CPP = $CPP"                                                 >> $MAKEFILE
+echo "LINK = $LINK"                                               >> $MAKEFILE
+echo                                                              >> $MAKEFILE
+
+all_inc="$CORE_INCS $OBJS"
+all_inc=`echo " $all_inc" | sed -e "s/ \([^ ]\)/ $INCOPT\1/g"`
+all_inc=`echo $all_inc | sed -e "s/\//$DIRSEP/g"`
+
+echo "ALL_INCS = $all_inc"                                        >> $MAKEFILE
+echo                                                              >> $MAKEFILE
+
+all_srcs="$CORE_SRCS"
+
+
+# CORE_DEPS
+
+echo "CORE_DEPS = \\"                                             >> $MAKEFILE
+
+for dep in $CORE_DEPS
+do
+    echo "	$dep \\"                                              >> $MAKEFILE
+done
+echo                                                              >> $MAKEFILE
+
+
+# CORE_INCS
+
+inc="$CORE_INCS $OBJS"
+inc=`echo " $inc" | sed -e "s/ \([^ ]\)/ $INCOPT\1/g" -e "s/\//$DIRSEP/g"`
+
+echo "CORE_INCS = $inc"                                           >> $MAKEFILE
+echo                                                              >> $MAKEFILE
+
+
+# nginx
+
+echo "nginx$BINEXT: \\"                                           >> $MAKEFILE
+
+
+# nginx deps
+
+for src in $all_srcs
+do
+    obj=`echo $src | sed -e "s/\.c\$/.$OBJEXT/" -e "s/\.S\$/.$OBJEXT/"`
+    obj=`echo $OBJS/$obj | sed -e "s/\//$DIRSEP/g"`
+
+    echo "	$obj \\"                                              >> $MAKEFILE
+done
+echo                                                              >> $MAKEFILE
+
+
+# nginx build
+
+echo "	\$(LINK) ${BINOUT}nginx \\"                               >> $MAKEFILE
+
+
+# nginx build sources
+
+for src in $all_srcs
+do
+    obj=`echo $src | sed -e "s/\.c\$/.$OBJEXT/" -e "s/\.S\$/.$OBJEXT/"`
+    obj=`echo $OBJS/$obj | sed -e "s/\//$DIRSEP/g"`
+
+    echo "	$obj \\"                                              >> $MAKEFILE
+done
+echo                                                              >> $MAKEFILE
+
+
+# ngx_modules.c
+
+deps="\$(CORE_DEPS)"
+
+args="\$(CFLAGS) \$(CORE_INCS)"
+
+# core sources
+
+for src in $CORE_SRCS
+do
+    obj=`echo $src | sed -e "s/\.c\$/.$OBJEXT/" -e "s/\.S\$/.$OBJEXT/"`
+    obj=`echo $OBJS/$obj | sed -e "s/\//$DIRSEP/g"`
+    src=`echo $src | sed -e "s/\//$DIRSEP/g"`
+
+    echo "$obj: \\"                                               >> $MAKEFILE
+    echo "	$src $deps"                                           >> $MAKEFILE
+    echo "	\$(CC) $COMPOPT $args \\"                             >> $MAKEFILE
+    echo "	$OBJOUT$obj \\"                                       >> $MAKEFILE
+    echo "	$src"                                                 >> $MAKEFILE
+    echo                                                          >> $MAKEFILE
+done
+echo                                                              >> $MAKEFILE

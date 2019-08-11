@@ -1,0 +1,20 @@
+
+# Copyright (C) Ding Peilong
+
+
+if test ! -f Makefile; then
+
+    cat << END > Makefile
+
+build:
+	\$(MAKE) -f $OBJS/Makefile
+
+install:
+	\$(MAKE) -f $OBJS/Makefile install
+
+clean:
+	rm -rf Makefile $OBJS
+
+END
+
+fi
