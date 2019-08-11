@@ -7,6 +7,7 @@
 . auto/init
 . auto/sources
 
+rm -rf $OBJS Makefile nginx
 test -d $OBJS || mkdir $OBJS
 echo > $NGX_AUTO_CONFIG_H
 
@@ -20,3 +21,12 @@ fi
 
 . auto/make
 . auto/install
+
+if [ "$PLATFORM" != win32 ]; then
+    . auto/unix
+fi
+
+have=NGX_PREFIX value="\"$PREFIX/\"" . auto/define
+have=NGX_SBIN_PATH value="\"$SBIN_PATH\"" . auto/define
+have=NGX_CONF_PATH value="\"$CONF_PATH\"" . auto/define
+have=NGX_PID_PATH value="\"$PID_PATH\"" . auto/define

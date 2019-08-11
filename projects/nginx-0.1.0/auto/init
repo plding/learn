@@ -12,4 +12,27 @@ NGX_ERR=$OBJS/autoconf.err
 
 CC_WARN=$CC
 
+PCH=NO
+USEPCH=
+
+OBJEXT=
+BINEXT=
 DIRSEP='\/'
+MAKE_SL=NO
+
+
+# checking echo's "-n" option and "\c" capabilities
+
+if echo "test\c" | grep c >/dev/null; then
+    if echo -n test | grep n >/dev/null; then
+        ngx_n=
+        ngx_c=
+    else
+        ngx_n=-n
+        ngx_c=
+    fi
+
+else
+    ngx_n=
+    ngx_c='\c'
+fi

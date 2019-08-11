@@ -1,0 +1,34 @@
+
+# Copyright (C) Ding Peilong
+
+
+CC_WARN=$CC
+ngx_fmt_collect=yes
+
+# C types
+
+ngx_type="int"; . auto/types/sizeof
+ngx_formats="%d"; . auto/fmt/fmt
+
+ngx_type="long"; . auto/types/sizeof
+ngx_formats="%ld"; . auto/fmt/fmt
+
+ngx_type="long long"; . auto/types/sizeof
+ngx_formats="%lld %qd"; . auto/fmt/fmt
+
+ngx_type="void *"; . auto/types/sizeof; ngx_ptr_size=$ngx_size
+ngx_fmt_name=PTR_FMT;
+eval ngx_formats=\${ngx_${ngx_ptr_size}_fmt}; . auto/fmt/ptrfmt
+
+
+# POSIX types
+
+NGX_AUTO_CONFIG="#include \"../$NGX_AUTO_CONFIG_H\""
+
+
+# printf() formats
+
+ngx_fmt_collect=no
+
+ngx_fmt_name=SIZE_T_FMT; ngx_type="size_t"; . auto/types/sizeof
+eval ngx_formats=\${ngx_${ngx_size}_fmt}; . auto/fmt/fmt

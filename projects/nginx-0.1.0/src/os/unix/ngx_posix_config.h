@@ -37,5 +37,7 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 
+#include <ngx_auto_config.h>
+
 
 #endif /* _NGX_POSIX_CONFIG_H_INCLUDED_ */

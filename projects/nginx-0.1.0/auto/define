@@ -1,0 +1,11 @@
+
+# Copyright (C) Ding Peilong
+
+
+cat << END >> $NGX_AUTO_CONFIG_H
+
+#ifndef $have
+#define $have  $value
+#endif
+
+END

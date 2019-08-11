@@ -8,9 +8,15 @@ CORE_INCS="src/core"
 
 CORE_DEPS="src/core/nginx.h \
            src/core/ngx_config.h \
-           src/core/ngx_core.h"
+           src/core/ngx_core.h \
+           src/core/ngx_log.h \
+           src/core/ngx_cycle.h \
+           src/core/ngx_palloc.h \
+           src/core/ngx_string.h"
 
-CORE_SRCS="src/core/nginx.c"
+CORE_SRCS="src/core/nginx.c \
+           src/core/ngx_log.c \
+           src/core/ngx_palloc.c"
 
 
 EVENT_MODULES=""
@@ -24,9 +30,14 @@ EVENT_SRCS=""
 
 UNIX_INCS="$CORE_INCS $EVENT_INCS src/os/unix"
 
-UNIX_DEPS="$CORE_DEPS $EVENT_DEPS"
+UNIX_DEPS="$CORE_DEPS $EVENT_DEPS \
+           src/os/unix/ngx_types.h \
+           src/os/unix/ngx_alloc.h \
+           src/os/unix/ngx_process_cycle.h \
+           src/os/unix/ngx_errno.h"
 
-UNIX_SRCS="$CORE_SRCS $EVENT_SRCS"
+UNIX_SRCS="$CORE_SRCS $EVENT_SRCS \
+           src/os/unix/ngx_alloc.c"
 
 
 POSIX_DEPS="src/os/unix/ngx_posix_config.h"

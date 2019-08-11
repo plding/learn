@@ -37,4 +37,12 @@
 #endif
 
 
+typedef int                ngx_int_t;
+typedef u_int              ngx_uint_t;
+typedef int                ngx_flag_t;
+#define NGX_INT_T_LEN      sizeof("-2147483648") - 1
+#define NGX_INT_T_FMT      "d"
+#define NGX_UINT_T_FMT     "u"
+
+
 #endif /* _NGX_CONFIG_H_INCLUDED_ */

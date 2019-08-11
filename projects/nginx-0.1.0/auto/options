@@ -14,7 +14,7 @@ CC=gcc
 CPP=
 OBJS=objs
 
-DEBUG=NO
+DEBUG=YES
 
 
 for option
