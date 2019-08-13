@@ -16,6 +16,7 @@ if [ $DEBUG = YES ]; then
 fi
 
 . auto/os/conf
+. auto/modules
 
 . auto/cc
 

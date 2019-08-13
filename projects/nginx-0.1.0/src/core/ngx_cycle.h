@@ -23,4 +23,18 @@ struct ngx_cycle_s {
 };
 
 
+typedef struct {
+    ngx_flag_t   daemon;
+    ngx_flag_t   master;
+    
+    ngx_int_t    woker_processes;
+
+    // ngx_uid_t    user;
+    // ngx_gid_t    group;
+
+    ngx_str_t    pid;
+    ngx_str_t    newpid;
+} ngx_core_conf_t;
+
+
 #endif /* _NGX_CYCLE_H_INCLUDED_ */

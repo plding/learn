@@ -85,6 +85,18 @@ static void ngx_log_write(ngx_log_t *log, char *errstr, size_t len)
 
 #if !(HAVE_VARIADIC_MACROS)
 
+void ngx_log_error(ngx_uint_t level, ngx_log_t *log, ngx_err_t err,
+                   const char *fmt, ...)
+{
+    va_list    args;
+
+    if (log->log_level >= level) {
+        va_start(args, fmt);
+        ngx_log_error_core(NGX_LOG_DEBUG, log, err, fmt, args);
+        va_end(args);
+    }
+}
+
 void ngx_log_debug_core(ngx_log_t *log, ngx_err_t err, const char *fmt, ...)
 {
     va_list    args;

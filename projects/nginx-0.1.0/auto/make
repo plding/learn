@@ -55,6 +55,14 @@ do
 
     echo "	$obj \\"                                              >> $MAKEFILE
 done
+
+for src in $NGX_MODULES_C $LINK_DEPS
+do
+    obj=`echo $src | sed -e "s/\.c\$/.$OBJEXT/"`
+    obj=`echo $obj | sed -e "s/\//$DIRSEP/g"`
+
+    echo "	$obj \\"                                              >> $MAKEFILE
+done
 echo                                                              >> $MAKEFILE
 
 
@@ -72,6 +80,14 @@ do
 
     echo "	$obj \\"                                              >> $MAKEFILE
 done
+
+
+# nginx build ngx_modules.c and libs
+
+obj=`echo $NGX_MODULES_C | sed -e "s/\.c\$/.$OBJEXT/" -e "s/\//$DIRSEP/g"`
+src=`echo $NGX_MODULES_C | sed -e "s/\//$DIRSEP/g"`
+
+echo "	$obj \\"                                                  >> $MAKEFILE
 echo                                                              >> $MAKEFILE
 
 
@@ -80,6 +96,14 @@ echo                                                              >> $MAKEFILE
 deps="\$(CORE_DEPS)"
 
 args="\$(CFLAGS) \$(CORE_INCS)"
+
+echo "$obj: \\"                                                   >> $MAKEFILE
+echo "	$NGX_MODULES_C $deps"									  >> $MAKEFILE
+echo "	\$(CC) $COMPOPT $args \\"								  >> $MAKEFILE
+echo "		$OBJOUT$obj \\"										  >> $MAKEFILE
+echo "		$src"												  >> $MAKEFILE
+echo                                                              >> $MAKEFILE
+
 
 # core sources
 
