@@ -20,6 +20,9 @@ struct ngx_cycle_s {
     ngx_log_t         *new_log;
 
     ngx_cycle_t       *old_cycle;
+    
+    ngx_str_t          conf_file;
+    ngx_str_t          root;
 };
 
 
@@ -35,6 +38,13 @@ typedef struct {
     ngx_str_t    pid;
     ngx_str_t    newpid;
 } ngx_core_conf_t;
+
+
+ngx_cycle_t *ngx_init_cycle(ngx_cycle_t *old_cycle);
+
+
+extern volatile ngx_cycle_t  *ngx_cycle;
+extern ngx_uint_t             ngx_test_config;
 
 
 #endif /* _NGX_CYCLE_H_INCLUDED_ */

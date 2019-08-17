@@ -12,11 +12,15 @@ CORE_DEPS="src/core/nginx.h \
            src/core/ngx_log.h \
            src/core/ngx_cycle.h \
            src/core/ngx_palloc.h \
-           src/core/ngx_string.h"
+           src/core/ngx_string.h \
+           src/core/ngx_conf_file.h"
 
 CORE_SRCS="src/core/nginx.c \
            src/core/ngx_log.c \
-           src/core/ngx_palloc.c"
+           src/core/ngx_palloc.c \
+           src/core/ngx_cycle.c \
+           src/core/ngx_conf_file.c \
+           src/core/ngx_string.c"
 
 
 EVENT_MODULES=""

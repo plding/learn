@@ -25,9 +25,13 @@ do
     esac
 
     case "$option" in
-        --help)                     help=yes            ;;
+        --help)                          help=yes                   ;;
 
-        --prefix=*)                 PREFIX="$value"     ;;
+        --prefix=*)                      PREFIX="$value"            ;;
+        --sbin-path=*)                   SBIN_PATH="$value"         ;;
+        --conf-path=*)                   CONF_PATH="$value"         ;;
+        --error-log-path=*)              ERROR_LOG_PATH="$value"    ;;
+        --pid-path=*)                    PID_PATH="$value"          ;;
 
         *)
             echo "$0: error: invalid option \"$option\""
@@ -44,3 +48,68 @@ if [ $help = yes ]; then
 
     exit 1
 fi
+
+
+if [ ".$PREFIX" = "." ]; then
+    PREFIX=/usr/local/nginx
+fi
+
+
+case ".$SBIN_PATH" in
+    ./*)
+    ;;
+
+    .)
+        SBIN_PATH=$PREFIX/sbin/nginx
+    ;;
+
+    *)
+        SBIN_PATH=$PREFIX/$SBIN_PATH
+    ;;
+esac
+
+
+case ".$CONF_PATH" in
+    ./*)
+    ;;
+
+    .)
+        CONF_PATH=$PREFIX/conf/nginx.conf
+    ;;
+
+    *)
+        CONF_PATH=$PREFIX/$CONF_PATH
+    ;;
+esac
+
+
+case ".$PID_PATH" in
+    ./*)
+    ;;
+
+    .)
+        PID_PATH=$PREFIX/logs/nginx.pid
+    ;;
+
+    *)
+        PID_PATH=$PREFIX/$PID_PATH
+    ;;
+esac
+
+
+case ".$ERROR_LOG_PATH" in
+    ./*)
+    ;;
+
+    .)
+        ERROR_LOG_PATH=$PREFIX/logs/error.log
+    ;;
+
+    .stderr)
+        ERROR_LOG_PATH=
+    ;;
+
+    *)
+        ERROR_LOG_PATH=$PREFIX/$ERROR_LOG_PATH
+    ;;
+esac

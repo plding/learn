@@ -54,5 +54,7 @@ typedef struct {
 /* msvc and icc compile memcmp() to the inline loop */
 #define ngx_memcmp                memcmp
 
+u_char *ngx_cpystrn(u_char *dst, u_char *src, size_t n);
+
 
 #endif /* _NGX_STRING_H_INCLUDED_ */

@@ -137,6 +137,9 @@ struct ngx_conf_s {
 };
 
 
+ngx_int_t ngx_conf_full_name(ngx_cycle_t *cycle, ngx_str_t *name);
+
+
 extern ngx_uint_t     ngx_max_module;
 extern ngx_module_t  *ngx_modules[];
 
