@@ -38,6 +38,9 @@ set(1.getting_started
     4.4.textures_exercise2
     4.5.textures_exercise3
     4.6.textures_exercise4
+    5.1.transformations
+    5.2.transformations_exercise1
+    5.3.transformations_exercise2
 )
 
 configure_file(configuration/root_directory.h.in configuration/root_directory.h)
