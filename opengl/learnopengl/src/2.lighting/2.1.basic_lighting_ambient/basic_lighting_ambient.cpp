@@ -74,8 +74,8 @@ int main()
 
     // build and compile our shader program
     // ------------------------------------
-    Shader lightingShader("1.colors.vs", "1.colors.fs");
-    Shader lampShader("1.lamp.vs", "1.lamp.fs");
+    Shader lightingShader("2.1.basic_lighting.vs", "2.1.basic_lighting.fs");
+    Shader lampShader("2.1.lamp.vs", "2.1.lamp.fs");
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
@@ -142,11 +142,7 @@ int main()
     glGenVertexArrays(1, &lightVAO);
     glBindVertexArray(lightVAO);
 
-    // we only need to bind to the VBO (to link it with glVertexAttribPointer), no need to fill it;
-    // the VBO's data already contains all we need (it's already bound, but we do it again for
-    // educational purpose)
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *) 0);
     glEnableVertexAttribArray(0);
 
@@ -164,6 +160,7 @@ int main()
         processInput(window);
 
         // render
+        // ------
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -181,7 +178,7 @@ int main()
         // world transformation
         glm::mat4 model(1.0f);
         lightingShader.setMat4("model", model);
-
+        
         // render the cube
         glBindVertexArray(cubeVAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);
