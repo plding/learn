@@ -54,6 +54,7 @@ set(2.lighting
     1.colors
     2.1.basic_lighting_ambient
     2.2.basic_lighting_diffuse
+    2.3.basic_lighting_specular
 )
 
 configure_file(configuration/root_directory.h.in configuration/root_directory.h)
