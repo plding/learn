@@ -19,6 +19,7 @@ set(LIBS ${OPENGL_LIBRARY} glew glfw)
 
 set(CHAPTERS
     1.getting_started
+    2.lighting
 )
 
 set(1.getting_started
@@ -47,6 +48,10 @@ set(1.getting_started
     7.1.camera_circle
     7.2.camera_keyboard_dt
     7.4.camera_class
+)
+
+set(2.lighting
+    1.colors
 )
 
 configure_file(configuration/root_directory.h.in configuration/root_directory.h)
