@@ -55,6 +55,7 @@ set(2.lighting
     2.1.basic_lighting_ambient
     2.2.basic_lighting_diffuse
     2.3.basic_lighting_specular
+    3.1.materials
 )
 
 configure_file(configuration/root_directory.h.in configuration/root_directory.h)
