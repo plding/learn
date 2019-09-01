@@ -111,9 +111,59 @@ list *listAddNodeTail(list *list, void *value)
 }
 
 /*
+ * 从链表中删除指定结点
+ */
+void listDelNode(list *list, listNode *node)
+{
+    if (node->prev) {
+        // 有前驱结点, 让前驱的next指针指向自己的next结点
+        node->prev->next = node->next;
+    } else {
+        // 没有前驱结点, 说明自己是头结点, 让列表的头指针指向自己的next结点
+        list->head = node->next;
+    }
+    if (node->next) {
+        // 有后继结点, 让后继的prev指针指向自己的prev结点
+        node->next->prev = node->prev;
+    } else {
+        // 没有后继结点, 说明自己是尾结点, 让列表的尾指针指向自己的prev结点
+        list->tail = node->prev;
+    }
+
+    // 链表长度减1
+    list->len--;
+
+    // 释放内存
+    if (list->free) {
+        list->free(node->value);
+    }
+    zfree(node);
+}
+
+/*
+ * 在链表中搜索指定的key
+ */
+listNode *listSearchKey(const list *list, void *key)
+{
+    listIter *iter;
+    listNode *node;
+
+    iter = listGetIterator(list, AL_START_HEAD);
+    while ((node = listNext(iter)) != NULL) {
+        if ((list->match && !list->match(node->value, key)) || node->value == key) {
+            // 找到了匹配的结点, 跳出循环
+            break; 
+        } 
+    }
+    listReleaseIterator(iter);
+
+    return node;
+}
+
+/*
  * 获取链表迭代器
  */
-listIter *listGetIterator(list *list, int direction)
+listIter *listGetIterator(const list *list, int direction)
 {
     // 申请内存
     listIter *iter = zmalloc(sizeof(listIter));
@@ -156,7 +206,7 @@ listNode *listNext(listIter *iter)
 /*
  * 当迭代器重置到链表头部
  */
-void listRewind(list *list, listIter *iter)
+void listRewind(const list *list, listIter *iter)
 {
     iter->next = list->head;
     iter->direction = AL_START_HEAD;
@@ -165,7 +215,7 @@ void listRewind(list *list, listIter *iter)
 /*
  * 当迭代器重置到链表尾部
  */
-void listRewindTail(list *list, listIter *iter)
+void listRewindTail(const list *list, listIter *iter)
 {
     iter->next = list->tail;
     iter->direction = AL_START_TAIL;

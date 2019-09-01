@@ -45,11 +45,15 @@ list *listCreate(void);
 void  listRelease(list *list);
 list *listAddNodeHead(list *list, void *value);
 list *listAddNodeTail(list *list, void *value);
+void  listDelNode(list *list, listNode *node);
+listNode *listSearchKey(const list *list, void *key);
+listNode *listIndex(const list *list, int index);
+list *listDup(const list *list);
 
-listIter *listGetIterator(list *list, int direction);
+listIter *listGetIterator(const list *list, int direction);
 listNode *listNext(listIter *iter);
-void      listRewind(list *list, listIter *iter);
-void      listRewindTail(list *list, listIter *iter);
+void      listRewind(const list *list, listIter *iter);
+void      listRewindTail(const list *list, listIter *iter);
 void      listReleaseIterator(listIter *iter);
 
 // 迭代器遍历方向

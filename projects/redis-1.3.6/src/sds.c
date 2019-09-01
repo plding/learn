@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <ctype.h>
 #include <string.h>
 #include "sds.h"
 #include "zmalloc.h"
@@ -127,6 +128,35 @@ static struct sdshdr *sdsMakeRoomFor(sds s, size_t addlen)
 }
 
 /*
+ * 拷贝指定长度的字符串到sds中
+ */
+sds sdscpylen(sds s, char *t, size_t len)
+{
+    struct sdshdr *sh = (struct sdshdr *) (s - sizeof(struct sdshdr));    
+    size_t totlen = sh->len + sh->free;
+
+    if (totlen < len) {
+        sh = sdsMakeRoomFor(s, len - sh->len);
+        totlen = sh->len + sh->free;
+    }
+
+    memcpy(sh->buf, t, len);
+    sh->buf[len] = '\0';
+    sh->len  = len;
+    sh->free = totlen - len;
+
+    return sh->buf;
+}
+
+/*
+ * 拷贝指定字符串到sds中
+ */
+sds sdscpy(sds s, char *t)
+{
+    return sdscpylen(s, t, strlen(t));
+}
+
+/*
  * 向sds中追加指定长度的字符串
  */
 sds sdscatlen(sds s, char *t, size_t len)
@@ -154,4 +184,84 @@ sds sdscatlen(sds s, char *t, size_t len)
 sds sdscat(sds s, char *t)
 {
     return sdscatlen(s, t, strlen(t));
+}
+
+/*
+ * 去除sds首尾指定字符
+ */
+sds sdstrim(sds s, const char *cset)
+{
+    struct sdshdr *sh = (struct sdshdr *) (s - sizeof(struct sdshdr));
+    char *sp, *ep, *end;
+    size_t len;
+
+    // 尾指针
+    end = s + sdslen(s);
+
+    // 遍历
+    for (sp = s; sp < end && strchr(cset, *sp); sp++)
+        ;
+    for (ep = end - 1; ep > sp && strchr(cset, *ep); ep--)
+        ;
+    
+    // 结果字符串长度
+    len = ep - sp + 1;
+
+    // 如果起始位置发生了改变, 需要拷贝内存
+    if (sp != s) {
+        memmove(s, sp, len);
+    }
+    s[len] = '\0'; // 结尾'\0'
+
+    // 重新设置free和len
+    sh->free += sh->len - len;
+    sh->len   = len;
+
+    // 返回新的sds
+    return s;
+}
+
+/*
+ * sds转小写
+ */
+void sdstolower(sds s)
+{
+    for (char *p = s, *end = s + sdslen(s); p < end; ++p) {
+        *p = tolower(*p);
+    }
+}
+
+/*
+ * sds转大写
+ */
+void sdstoupper(sds s)
+{
+    for (char *p = s, *end = s + sdslen(s); p < end; ++p) {
+        *p = toupper(*p);
+    }
+}
+
+/*
+ * sds比较
+ */
+int sdscmp(const sds s1, const sds s2)
+{
+    size_t len1, len2, len;
+    int cmp;
+
+    len1 = sdslen(s1);
+    len2 = sdslen(s2);
+    
+    if (len1 == len2) {
+        return memcmp(s1, s2, len1);
+    }
+
+    len = len1 < len2 ? len1 : len2;
+    cmp = memcmp(s1, s2, len);
+
+    if (cmp == 0) {
+        cmp = len1 - len2;
+    }
+
+    return cmp;
 }
