@@ -1,0 +1,19 @@
+apply plugin: 'java'
+
+jar {
+    from {
+        configurations.runtime.collect{zipTree(it)}
+    }
+    manifest {
+        attributes 'Main-Class': 'sia.knights.KnightMain'
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()    
+}
+
+dependencies {
+    compile("org.springframework:spring-context:4.0.7.RELEASE")
+}
