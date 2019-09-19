@@ -9,7 +9,7 @@
     </bean>
 
     <bean id="quest" class="sia.knights.SlayDragonQuest">
-        <constructor-arg ref="#{T(System).out}" />
+        <constructor-arg value="#{T(System).out}" />
     </bean>
 
 </beans>
