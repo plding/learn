@@ -1,0 +1,5 @@
+configure(subprojects - project(':onjava')) {
+    dependencies {
+        compile project(':onjava')
+    }
+}
