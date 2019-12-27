@@ -1,3 +1,9 @@
+project(':collections') {
+    dependencies {
+        compile project(':typeinfo')
+    }
+}
+
 configure(subprojects - project(':onjava')) {
     dependencies {
         compile project(':onjava')
