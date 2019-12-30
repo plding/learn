@@ -6,6 +6,7 @@ repositories {
 
 dependencies {
     compile "org.springframework:spring-webmvc:${springVersion}"
+    compile "javax.servlet:jstl:${jstlVersion}"
 
     providedCompile "javax.servlet:javax.servlet-api:${servletApiVersion}"
 

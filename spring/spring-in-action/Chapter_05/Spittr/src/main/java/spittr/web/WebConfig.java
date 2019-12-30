@@ -11,14 +11,14 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("spitter.web")
+@ComponentScan("spittr.web")
 public class WebConfig extends WebMvcConfigurerAdapter {
     
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setPrefix("/WEB-INF/views/");
-        resolver.setSuffix(".jpg");
+        resolver.setSuffix(".jsp");
         return resolver;
     }
 
