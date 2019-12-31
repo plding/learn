@@ -1,9 +1,10 @@
 package spittr.data;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
 import spittr.Spitter;
 
-@Component
+@Repository
 public class SimpleSpitterRepository implements SpitterRepository {
 
     @Override

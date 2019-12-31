@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Your Profile</h1>
-    <c:out value="${spittle.username}" /><br />
-    <c:out value="${spittle.firstName}" /> <c:out value="${spittle.lastName}" /><br />
+    <c:out value="${spitter.username}" /><br />
+    <c:out value="${spitter.firstName}" /> <c:out value="${spitter.lastName}" /><br />
 </body>
 </html>

@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import spittr.Spittle;
 
-@Component
+@Repository
 public class SimpleSpittleRepository implements SpittleRepository {
 
     @Override
