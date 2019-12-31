@@ -58,7 +58,7 @@ public class SpittleControllerTest {
     }
     
     @Test
-    public void saveSpittle() throws Exception {
+    public void testSpittle() throws Exception {
         Spittle expectedSpittle = new Spittle("Hello", new Date());
         SpittleRepository mockRepository = mock(SpittleRepository.class);
         when(mockRepository.findOne(12345)).thenReturn(expectedSpittle);

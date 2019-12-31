@@ -41,4 +41,18 @@ public class SpitterControllerTest {
 
         verify(mockRepository, atLeastOnce()).save(unsaved);
     }
+
+    @Test
+    public void shouldFailValidationWithNoData() throws Exception {
+        SpitterRepository mockRepository = mock(SpitterRepository.class);
+        SpitterController controller = new SpitterController(mockRepository);
+        MockMvc mockMvc = standaloneSetup(controller).build();
+
+        mockMvc.perform(post("/spitter/register"))
+            .andExpect(status().isOk())
+            .andExpect(view().name("registerForm"))
+            .andExpect(model().errorCount(4))
+            .andExpect(model().attributeHasFieldErrors(
+                    "spitter", "firstName", "lastName", "username", "password"));
+    }
 }
