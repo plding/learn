@@ -25,8 +25,8 @@ public class SpitterControllerTest {
     @Test
     public void shouldProcessRegistration() throws Exception {
         SpitterRepository mockRepository = mock(SpitterRepository.class);
-        Spitter unsaved = new Spitter("jbauer", "24hours", "Jack", "Bauer");
-        Spitter saved = new Spitter(24L, "jbauer", "24hours", "Jack", "Bauer");
+        Spitter unsaved = new Spitter("jbauer", "24hours", "Jack", "Bauer", "jbauer@ctu.gov");
+        Spitter saved = new Spitter(24L, "jbauer", "24hours", "Jack", "Bauer", "jbauer@ctu.gov");
         when(mockRepository.save(unsaved)).thenReturn(saved);
 
         SpitterController controller = new SpitterController(mockRepository);
@@ -36,7 +36,8 @@ public class SpitterControllerTest {
                .param("firstName", "Jack")
                .param("lastName", "Bauer")
                .param("username", "jbauer")
-               .param("password", "24hours"))
+               .param("password", "24hours")
+               .param("email", "jbauer@ctu.gov"))
                .andExpect(redirectedUrl("/spitter/jbauer"));
 
         verify(mockRepository, atLeastOnce()).save(unsaved);
@@ -51,8 +52,8 @@ public class SpitterControllerTest {
         mockMvc.perform(post("/spitter/register"))
             .andExpect(status().isOk())
             .andExpect(view().name("registerForm"))
-            .andExpect(model().errorCount(4))
+            .andExpect(model().errorCount(5))
             .andExpect(model().attributeHasFieldErrors(
-                    "spitter", "firstName", "lastName", "username", "password"));
+                    "spitter", "firstName", "lastName", "username", "password", "email"));
     }
 }

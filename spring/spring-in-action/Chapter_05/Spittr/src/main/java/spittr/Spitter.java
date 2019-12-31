@@ -1,5 +1,6 @@
 package spittr;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -25,19 +26,24 @@ public class Spitter {
     @NotNull
     @Size(min=2, max=30)
     private String lastName;
+
+    @NotNull
+    @Email
+    private String email;
     
     public Spitter() {}
 
-    public Spitter(String username, String password, String firstName, String lastName) {
-        this(null, username, password, firstName, lastName); 
+    public Spitter(String username, String password, String firstName, String lastName, String email) {
+        this(null, username, password, firstName, lastName, email); 
     }
 
-    public Spitter(Long id, String username, String password, String firstName, String lastName) {
+    public Spitter(Long id, String username, String password, String firstName, String lastName, String email) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.email = email;
     }
 
     public String getUsername() {
@@ -70,6 +76,14 @@ public class Spitter {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
