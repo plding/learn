@@ -8,6 +8,7 @@ dependencies {
     compile "org.springframework:spring-webmvc:${springVersion}"
     compile "org.apache.commons:commons-lang3:${commonsLangVersion}"
     compile "javax.servlet:jstl:${jstlVersion}"
+    compile "javax.validation:validation-api:${validationApiVersion}"
 
     providedCompile "javax.servlet:javax.servlet-api:${servletApiVersion}"
 
