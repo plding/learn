@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import spittr.Spitter;
 
+@Repository
 public class JdbcSpitterRepository implements SpitterRepository {
 
     private JdbcOperations jdbc;
