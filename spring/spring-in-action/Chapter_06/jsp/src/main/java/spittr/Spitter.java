@@ -1,10 +1,11 @@
 package spittr;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.hibernate.validator.constraints.Email;
 
 public class Spitter {
 
@@ -88,5 +89,10 @@ public class Spitter {
     @Override
     public boolean equals(Object that) {
         return EqualsBuilder.reflectionEquals(this, that, "id", "username", "password", "firstName", "lastName", "email");
+    }
+
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this, "id", "username", "password", "firstName", "lastName", "email");
     }
 }

@@ -5,7 +5,9 @@ repositories {
 }
 
 dependencies {
+    compile "com.h2database:h2:$h2Version"
     compile "org.springframework:spring-webmvc:$springVersion"
+    compile "org.springframework:spring-jdbc:$springVersion"
     compile "org.apache.commons:commons-lang3:$commonsLangVersion"
     compile "org.hibernate:hibernate-validator:$hibernateValidatorVersion"
     compile "javax.servlet:jstl:$jstlVersion"
