@@ -12,14 +12,10 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 repositories {
-    mavenCentral();
+    mavenCentral()
 }
 
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web'
-
-    compileOnly 'org.projectlombok:lombok:1.18.6'
-    annotationProcessor 'org.projectlombok:lombok:1.18.6'
-
     testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
