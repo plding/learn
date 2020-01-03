@@ -1,0 +1,24 @@
+apply plugin: 'war'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "com.h2database:h2:$h2Version"
+    compile "org.springframework:spring-webmvc:$springVersion"
+    compile "org.springframework:spring-jdbc:$springVersion"
+    compile "org.apache.commons:commons-lang3:$commonsLangVersion"
+    compile "org.hibernate:hibernate-validator:$hibernateValidatorVersion"
+    compile "javax.servlet:jstl:$jstlVersion"
+    compile "javax.xml.bind:jaxb-api:$jaxbApiVersion"
+    compile "javax.validation:validation-api:$validationApiVersion"
+    compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+
+    providedCompile "javax.servlet:javax.servlet-api:$servletApiVersion"
+
+    testCompile "junit:junit:$junitVersion"
+    testCompile "org.springframework:spring-test:$springVersion"
+    testCompile "org.mockito:mockito-core:$mockitoVersion"
+    testCompile "org.hamcrest:hamcrest-library:$hamcrestVersion"
+}
