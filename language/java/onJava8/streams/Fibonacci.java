@@ -13,6 +13,9 @@ public class Fibonacci {
     }
 
     public static void main(String[] args) {
-        new Fibonacci().numbers().skip(20).limit(10).forEach(System.out::println);
+        new Fibonacci().numbers()
+                       .skip(20)
+                       .limit(10)
+                       .forEach(System.out::println);
     }
 }
