@@ -1,6 +1,8 @@
 // typeinfo/pets/Pets.java
 package typeinfo.pets;
+
 import java.util.*;
+import java.util.stream.*;
 
 public class Pets {
     public static final PetCreator CREATOR = new LiteralPetCreator();
@@ -20,5 +22,9 @@ public class Pets {
         List<Pet> result = new ArrayList<>();
         Collections.addAll(result, array(size));
         return result;
+    }
+
+    public static Stream<Pet> stream() {
+        return Stream.generate(CREATOR);
     }
 }

@@ -1,4 +1,5 @@
 // typeinfo/pets/LiteralPetCreator.java
+// {java typeinfo.pets.LiteralPetCreator}
 package typeinfo.pets;
 import java.util.*;
 
