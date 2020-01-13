@@ -1,4 +1,5 @@
 // typeinfo/PetCount3.java
+// Using isInstance() 
 import java.util.*;
 import java.util.stream.*;
 
