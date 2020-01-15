@@ -4,6 +4,12 @@ project(':collections') {
     }
 }
 
+project(':hiding') {
+    dependencies {
+        compile project(':com')
+    }
+}
+
 configure(subprojects - project(':onjava')) {
     dependencies {
         compile project(':onjava')

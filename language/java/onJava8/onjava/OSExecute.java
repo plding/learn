@@ -9,8 +9,10 @@ public class OSExecute {
         try {
             Process process = new ProcessBuilder(command.split(" ")).start();
             try (
-                BufferedReader results = new BufferedReader(new InputStreamReader(process.getInputStream()));
-                BufferedReader errors  = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+                BufferedReader results = new BufferedReader(
+                        new InputStreamReader(process.getInputStream()));
+                BufferedReader errors  = new BufferedReader(
+                        new InputStreamReader(process.getErrorStream()));
             ) {
                 results.lines().forEach(System.out::println);
                 err = errors.lines().peek(System.err::println).count() > 0;

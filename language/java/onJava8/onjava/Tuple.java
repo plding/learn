@@ -14,7 +14,8 @@ public class Tuple {
         return new Tuple4<>(a, b, c, d);
     }
 
-    public static <A, B, C, D, E> Tuple5<A, B, C, D, E> tuple(A a, B b, C c, D d, E e) {
+    public static <A, B, C, D, E> Tuple5<A, B, C, D, E>
+            tuple(A a, B b, C c, D d, E e) {
         return new Tuple5<>(a, b, c, d, e);
     }
 }
