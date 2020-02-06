@@ -2,8 +2,9 @@ package main
 
 import "os"
 import "fmt"
-import "simplemath"
 import "strconv"
+
+import "gobook.com/ch01/calcproj/simplemath"
 
 var Usage = func() {
 	fmt.Println("USAGE: calc command [arguments] ...\n")
