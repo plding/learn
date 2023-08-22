@@ -9,9 +9,9 @@ find_package(GLFW3 REQUIRED)
 
 include_directories(${CMAKE_SOURCE_DIR}/includes)
 include_directories(/usr/local/include)
-include_directories(/usr/local/Cellar/glew/2.1.0/include)
+include_directories(/usr/local/Cellar/glew/2.2.0_1/include)
 
-link_directories(/usr/local/Cellar/glew/2.1.0/lib)
+link_directories(/usr/local/Cellar/glew/2.2.0_1/lib)
 link_directories(/usr/local/Cellar/glfw/3.3/lib)
 
 find_library(OpenGL_LIBRARY OpenGL)
