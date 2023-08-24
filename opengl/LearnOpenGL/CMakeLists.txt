@@ -20,6 +20,8 @@ set(1.getting_started
     2.3.hello_triangle_exercise1
     2.4.hello_triangle_exercise2
     2.5.hello_triangle_exercise3
+    3.1.shaders_uniform
+    3.2.shaders_interpolation
 )
 
 # first create relevant static libraries required for other projects
