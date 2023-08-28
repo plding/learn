@@ -25,6 +25,7 @@ set(1.getting_started
     3.3.shaders_class
     3.4.shaders_exercise1
     3.5.shaders_exercise2
+    3.6.shaders_exercise3
     4.1.textures
 )
 
