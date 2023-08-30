@@ -27,6 +27,7 @@ set(1.getting_started
     3.5.shaders_exercise2
     3.6.shaders_exercise3
     4.1.textures
+    4.2.textures_combined
 )
 
 configure_file(configuration/root_directory.h.in configuration/root_directory.h)
