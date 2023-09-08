@@ -30,6 +30,7 @@ set(1.getting_started
     4.2.textures_combined
     4.3.textures_exercise1
     5.1.transformations
+    5.2.transformations_exercise1
 )
 
 configure_file(configuration/root_directory.h.in configuration/root_directory.h)
